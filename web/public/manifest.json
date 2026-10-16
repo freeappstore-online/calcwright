@@ -1,14 +1,25 @@
 {
-  "name": "calcwright",
-  "short_name": "calcwright",
-  "description": "Free calcwright app — part of FreeAppStore",
+  "name": "Calcwright",
+  "short_name": "Calcwright",
+  "description": "Coming soon — pro calculators for money and the trade: time value of money, loans, NPV/IRR and conduit bending. Offline and private.",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",
+  "min_viewport_width": 320,
   "background_color": "#ffffff",
   "theme_color": "#111111",
   "icons": [
-    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
   ]
 }
