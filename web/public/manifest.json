@@ -1,7 +1,7 @@
 {
   "name": "Calcwright",
   "short_name": "Calcwright",
-  "description": "Coming soon — pro calculators for money and the trade: time value of money, loans, NPV/IRR and conduit bending. Offline and private.",
+  "description": "Pro calculators for money and the trade: time value of money, loans, NPV/IRR and conduit bending. Offline and private.",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",
