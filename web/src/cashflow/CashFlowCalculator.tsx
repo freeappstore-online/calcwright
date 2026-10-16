@@ -145,7 +145,7 @@ export function CashFlowCalculator() {
           Reset
         </button>
       </div>
-      <p className="mt-3 text-xs text-[var(--muted)]">Your inputs are saved on this device only. Results are estimates, not financial advice.</p>
+      <p className="mt-3 text-xs text-[var(--muted)]">Your inputs are saved on this device only.</p>
     </section>
   )
 }

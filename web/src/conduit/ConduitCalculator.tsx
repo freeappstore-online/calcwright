@@ -160,36 +160,36 @@ export function ConduitCalculator() {
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-[var(--ink)]">
-        <label className="flex items-center gap-2">
-          Units
-          <select value={units} onChange={(e) => setState((s) => ({ ...s, units: e.target.value as Units }))} className={select}>
+        <div className="flex items-center gap-2">
+          <label htmlFor="conduit-units">Units</label>
+          <select id="conduit-units" value={units} onChange={(e) => setState((s) => ({ ...s, units: e.target.value as Units }))} className={select}>
             <option value="in">Inches</option>
             <option value="mm">Millimetres</option>
           </select>
-        </label>
+        </div>
         {usesSize && (
-          <label className="flex items-center gap-2">
-            Conduit
-            <select value={size} onChange={(e) => setState((s) => ({ ...s, size: e.target.value as ConduitSize }))} className={select}>
+          <div className="flex items-center gap-2">
+            <label htmlFor="conduit-size">Conduit</label>
+            <select id="conduit-size" value={size} onChange={(e) => setState((s) => ({ ...s, size: e.target.value as ConduitSize }))} className={select}>
               {SIZES.map((s) => (
                 <option key={s} value={s}>
                   {s}″ (EMT {METRIC_SIZE[s]})
                 </option>
               ))}
             </select>
-          </label>
+          </div>
         )}
         {usesAngle && (
-          <label className="flex items-center gap-2">
-            Angle
-            <select value={angle} onChange={(e) => setState((s) => ({ ...s, angle: Number(e.target.value) as BendAngle }))} className={select}>
+          <div className="flex items-center gap-2">
+            <label htmlFor="conduit-angle">Angle</label>
+            <select id="conduit-angle" value={angle} onChange={(e) => setState((s) => ({ ...s, angle: Number(e.target.value) as BendAngle }))} className={select}>
               {ANGLES.map((a) => (
                 <option key={a} value={a}>
                   {a}°
                 </option>
               ))}
             </select>
-          </label>
+          </div>
         )}
       </div>
 
@@ -223,7 +223,7 @@ export function ConduitCalculator() {
         </button>
       </div>
       <p className="mt-3 text-xs text-[var(--muted)]">
-        Take-up varies by bender make; check yours. Your inputs are saved on this device only. Results are estimates, not electrical-code advice.
+        Take-up varies by bender make; check yours. Your inputs are saved on this device only.
       </p>
     </section>
   )

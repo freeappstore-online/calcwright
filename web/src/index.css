@@ -52,8 +52,9 @@
   --panel: rgba(255, 255, 255, 0.72);
   --panel-strong: rgba(255, 255, 255, 0.88);
   --panel-quiet: rgba(255, 255, 255, 0.6);
-  --accent: #d86f4d;
-  --accent-soft: #ffd4bf;
+  /* Dark enough for WCAG AA: 5.6:1 under white text, 4.7:1 on --accent-soft. */
+  --accent: #a84d2c;
+  --accent-soft: #ffe8dc;
   --accent-deep: #9f4427;
   --sky: #4c97b5;
   --sky-soft: #c6e6f2;
@@ -213,8 +214,11 @@ button:active {
 }
 
 button:focus-visible,
-a:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--sky) 52%, white);
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--sky-deep);
   outline-offset: 3px;
 }
 
@@ -229,6 +233,41 @@ a:focus-visible {
 
 } /* end @layer base */
 
+/* App-shell layout: the Shell's top bar and footer stay put and each screen
+   scrolls inside <main>, the way an installed app behaves. */
+#root {
+  height: 100dvh;
+  overflow: hidden;
+}
+#root > div {
+  height: 100%;
+  min-height: 0 !important;
+}
+.fas-main {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
 /* Shell's text-size preference scales rem-based app typography. */
 :root[data-text='lg'] { font-size: 112.5%; }
 :root[data-text='sm'] { font-size: 87.5%; }
+
+/* The Shell's accent buttons (Sign in) use white text, which is too faint on
+   the light dark-theme accent; the paper colour passes AA in both themes. */
+#root header button[style*="--accent"] {
+  color: var(--paper) !important;
+}
+
+/* The Shell's top bar is 20px too wide for a 320px screen; tighten its
+   padding there so every control still fits. */
+@media (max-width: 359px) {
+  #root header {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  #root header > div:last-child > button:last-child {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+}

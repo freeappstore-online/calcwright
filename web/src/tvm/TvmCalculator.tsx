@@ -94,8 +94,7 @@ export function TvmCalculator() {
         Pick the value to solve for and fill in the rest. Money paid out is negative, money received is positive.
       </p>
 
-      <fieldset className="mt-4 grid gap-3">
-        <legend className="sr-only">Values</legend>
+      <fieldset aria-label="Values" className="mt-4 grid gap-3">
         {KEYS.map((key) => (
           <div key={key} className="grid grid-cols-[6.5rem_1fr] items-center gap-3">
             <label className="flex items-center gap-2 font-semibold text-[var(--ink)]">
@@ -153,7 +152,7 @@ export function TvmCalculator() {
           type="button"
           onClick={copy}
           disabled={!('text' in result)}
-          className="rounded-[var(--radius)] bg-[var(--accent)] px-4 py-2 font-semibold text-white disabled:opacity-50"
+          className="rounded-[var(--radius)] bg-[var(--accent-deep)] px-4 py-2 font-semibold text-[var(--paper)] disabled:opacity-50"
         >
           {copied ? 'Copied' : `Copy ${LABELS[solveFor]}`}
         </button>
@@ -166,7 +165,7 @@ export function TvmCalculator() {
           </p>
         )}
       </div>
-      <p className="mt-3 text-xs text-[var(--muted)]">Your inputs are saved on this device only. Results are estimates, not financial advice.</p>
+      <p className="mt-3 text-xs text-[var(--muted)]">Your inputs are saved on this device only.</p>
     </section>
   )
 }

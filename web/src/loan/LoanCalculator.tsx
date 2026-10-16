@@ -123,7 +123,7 @@ export function LoanCalculator() {
           </dl>
 
           <div className="mt-4 flex flex-wrap gap-3">
-            <button type="button" onClick={download} className="rounded-[var(--radius)] bg-[var(--accent)] px-4 py-2 font-semibold text-white">
+            <button type="button" onClick={download} className="rounded-[var(--radius)] bg-[var(--accent-deep)] px-4 py-2 font-semibold text-[var(--paper)]">
               Download CSV
             </button>
             <button type="button" onClick={() => setState(DEFAULTS)} className="rounded-[var(--radius)] border border-[var(--line-strong)] px-4 py-2 text-[var(--ink)]">
@@ -161,7 +161,7 @@ export function LoanCalculator() {
           </div>
         </>
       )}
-      <p className="mt-3 text-xs text-[var(--muted)]">Your inputs are saved on this device only. Results are estimates, not financial advice.</p>
+      <p className="mt-3 text-xs text-[var(--muted)]">Your inputs are saved on this device only.</p>
     </section>
   )
 }

@@ -34,11 +34,16 @@ export default function App() {
   const navigate = (href: string) => {
     window.history.pushState(null, '', href)
     setPath(href)
+    // Screens scroll inside <main> (see index.css), so start each one at the top.
+    document.getElementById('main')?.scrollTo(0, 0)
   }
 
   return (
     <Shell app={fas} appName="Calcwright" nav={NAV} onNavigate={navigate}>
-      <div className="mx-auto w-full max-w-3xl p-4 sm:p-8">{path === '/about' ? <About /> : path === '/loans' ? <Loans /> : path === '/cashflows' ? <CashFlows /> : path === '/conduit' ? <Conduit /> : <Calculators />}</div>
+      <div className="mx-auto w-full max-w-3xl p-4 sm:p-8">
+        {path === '/about' ? <About /> : path === '/loans' ? <Loans /> : path === '/cashflows' ? <CashFlows /> : path === '/conduit' ? <Conduit /> : <Calculators />}
+        <Notice />
+      </div>
       <BuildInfo />
     </Shell>
   )
@@ -104,3 +109,15 @@ function About() {
   )
 }
 
+// Shown under every screen.
+function Notice() {
+  return (
+    <aside aria-labelledby="notice-title" className="mt-8 rounded-[var(--radius)] border border-[var(--line)] p-4 text-sm text-[var(--muted)]">
+      <h2 id="notice-title" className="font-semibold text-[var(--ink)]">
+        Privacy and disclaimer
+      </h2>
+      <p className="mt-1">All calculations run locally in your browser; no data is sent to any server.</p>
+      <p className="mt-1">Results are estimates only and are not financial, electrical-code or other professional advice.</p>
+    </aside>
+  )
+}

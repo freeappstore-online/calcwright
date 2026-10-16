@@ -15,7 +15,8 @@ saddles). Money maths is exact decimal. Tracked in
 pnpm install
 pnpm dev      # local dev server
 pnpm build    # production build in web/dist
-pnpm test     # unit and reference tests
+pnpm test     # unit and reference tests (Vitest)
+pnpm test:e2e # end-to-end tests (Playwright, against the built app)
 fas check     # FreeAppStore compliance checks
 ```
 
