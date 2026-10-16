@@ -1,0 +1,15 @@
+{
+  "name": "calcwright",
+  "private": true,
+  "packageManager": "pnpm@10.30.3",
+  "engines": { "node": ">=22" },
+  "pnpm": { "onlyBuiltDependencies": ["esbuild"] },
+  "repository": { "type": "git", "url": "git+https://github.com/freeappstore-online/calcwright.git" },
+  "scripts": {
+    "dev": "pnpm --filter @calcwright/web dev",
+    "build": "pnpm --filter @calcwright/web build",
+    "preview": "pnpm --filter @calcwright/web preview",
+    "typecheck": "pnpm --filter @calcwright/web exec tsc -b",
+    "test": "pnpm --filter @calcwright/web exec tsc -b"
+  }
+}
