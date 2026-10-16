@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { initApp } from '@freeappstore/sdk'
 import { BuildInfo, type NavItem, PageHeader, Shell } from '@freeappstore/sdk/ui'
+import { TvmCalculator } from './tvm/TvmCalculator'
 
 const fas = initApp({ appId: 'calcwright' })
 
@@ -21,6 +22,9 @@ const FEATURES = [
   { name: 'Exact money maths', what: 'Decimal arithmetic for money, formatted for your locale.' },
   { name: 'Private', what: 'Pure maths on your device. Works offline; your inputs never leave it.' },
 ]
+
+// Shipped features, left out of the coming-soon list.
+const AVAILABLE = new Set(['Time value of money', 'Exact money maths', 'Private'])
 
 export default function App() {
   const [path, setPath] = useState(() => window.location.pathname)
@@ -52,11 +56,12 @@ function Calculators() {
     <>
       <PageHeader
         title="Calcwright"
-        description="Coming soon — pro calculators for money and the trade: time value of money, loans, NPV/IRR and conduit bending. Offline and private."
+        description="Pro calculators for money and the trade: time value of money now, with loans, NPV/IRR and conduit bending to come. Offline and private."
       />
-      <ComingSoon />
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-        {FEATURES.map((feature) => (
+      <TvmCalculator />
+      <h2 className="mt-8 text-lg font-semibold text-[var(--ink)]">Coming soon</h2>
+      <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+        {FEATURES.filter((feature) => !AVAILABLE.has(feature.name)).map((feature) => (
           <li key={feature.name} className="rounded-[var(--radius)] border border-[var(--line)] p-4">
             <p className="font-semibold text-[var(--ink)]">{feature.name}</p>
             <p className="text-sm text-[var(--muted)]">{feature.what}</p>
@@ -89,11 +94,11 @@ function About() {
   )
 }
 
-// Placeholder until the features are built. None of them work yet, so it says so plainly.
+// Says plainly which parts work so far.
 function ComingSoon() {
   return (
     <p className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--panel)] p-4 text-[var(--muted)]">
-      Coming soon. Calcwright is in development; the features below aren't available yet.
+      Calcwright is in development. The time value of money calculator works now; loans, NPV/IRR and conduit bending are coming soon.
     </p>
   )
 }

@@ -20,6 +20,6 @@
     "build": "pnpm --filter @calcwright/web build",
     "preview": "pnpm --filter @calcwright/web preview",
     "typecheck": "pnpm --filter @calcwright/web exec tsc -b",
-    "test": "pnpm --filter @calcwright/web exec tsc -b"
+    "test": "pnpm --filter @calcwright/web test"
   }
 }

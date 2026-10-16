@@ -2,8 +2,8 @@
 
 Calcwright: pro calculators on FreeAppStore — TVM (N, I/Y, PV, PMT, FV; begin/end, P/Y, C/Y),
 loan amortisation (extra payments, CSV), NPV/IRR/MIRR and EMT conduit bending (offsets, stubs,
-back-to-backs, saddles). Pure maths, offline and private; exact decimal maths for money. Currently
-a "Coming soon" shell (Calculators, About); see
+back-to-backs, saddles). Pure maths, offline and private; exact decimal maths for money. The TVM
+solver is built (`web/src/tvm/`, reference tests via `pnpm test`); the rest is "Coming soon" — see
 freeappstore-online/platform#248.
 
 - Live: https://calcwright.freeappstore.online
