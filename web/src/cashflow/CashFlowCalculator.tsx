@@ -76,22 +76,22 @@ export function CashFlowCalculator() {
   const removeFlow = (t: number) => setState((s) => ({ ...s, flows: s.flows.filter((_, k) => k !== t) }))
   const addFlow = () => setState((s) => ({ ...s, flows: [...s.flows, ''] }))
 
-  const field = 'w-full rounded-[var(--radius)] border border-[var(--line-strong)] bg-[var(--paper)] px-3 py-2 text-right tabular-nums text-[var(--ink)]'
+  const field = 'w-full rounded-fas border border-line-strong bg-paper px-3 py-2 text-right tabular-nums text-ink'
 
   return (
-    <section aria-labelledby="cf-title" className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-6">
-      <h2 id="cf-title" className="text-lg font-semibold text-[var(--ink)]">
+    <section aria-labelledby="cf-title" className="rounded-fas border border-line bg-panel p-4 sm:p-6">
+      <h2 id="cf-title" className="text-lg font-semibold text-ink">
         NPV, IRR and MIRR
       </h2>
-      <p className="text-sm text-[var(--muted)]">
+      <p className="text-sm text-muted">
         CF0 is at time 0; each later flow comes at the end of its period. Money paid out is negative, money received is positive.
       </p>
 
       <fieldset className="mt-4 grid gap-2">
-        <legend className="mb-1 text-sm font-semibold text-[var(--ink)]">Cash flows</legend>
+        <legend className="mb-1 text-sm font-semibold text-ink">Cash flows</legend>
         {state.flows.map((flow, t) => (
           <div key={t} className="grid grid-cols-[3.5rem_1fr_auto] items-center gap-2">
-            <label htmlFor={`cf-${t}`} className="text-sm text-[var(--muted)]">
+            <label htmlFor={`cf-${t}`} className="text-sm text-muted">
               CF{t}
             </label>
             <input id={`cf-${t}`} inputMode="decimal" value={flow} onChange={(e) => setFlow(t, e.target.value)} className={field} />
@@ -100,36 +100,36 @@ export function CashFlowCalculator() {
               onClick={() => removeFlow(t)}
               disabled={state.flows.length <= 1}
               aria-label={`Remove CF${t}`}
-              className="rounded-[var(--radius)] border border-[var(--line-strong)] px-3 py-2 text-[var(--ink)] disabled:opacity-40"
+              className="rounded-fas border border-line-strong px-3 py-2 text-ink disabled:opacity-40"
             >
               ×
             </button>
           </div>
         ))}
         <div>
-          <button type="button" onClick={addFlow} className="mt-1 rounded-[var(--radius)] border border-[var(--line-strong)] px-4 py-2 text-[var(--ink)]">
+          <button type="button" onClick={addFlow} className="mt-1 rounded-fas border border-line-strong px-4 py-2 text-ink">
             Add cash flow
           </button>
         </div>
       </fieldset>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-3">
-        <label className="grid gap-1 text-sm text-[var(--ink)]">
+        <label className="grid gap-1 text-sm text-ink">
           Discount rate (NPV), %
           <input inputMode="decimal" value={state.rate} onChange={(e) => setState((s) => ({ ...s, rate: e.target.value }))} className={field} />
         </label>
-        <label className="grid gap-1 text-sm text-[var(--ink)]">
+        <label className="grid gap-1 text-sm text-ink">
           Finance rate (MIRR), %
           <input inputMode="decimal" value={state.finance} onChange={(e) => setState((s) => ({ ...s, finance: e.target.value }))} className={field} />
         </label>
-        <label className="grid gap-1 text-sm text-[var(--ink)]">
+        <label className="grid gap-1 text-sm text-ink">
           Reinvestment rate (MIRR), %
           <input inputMode="decimal" value={state.reinvest} onChange={(e) => setState((s) => ({ ...s, reinvest: e.target.value }))} className={field} />
         </label>
       </div>
 
       {'error' in results ? (
-        <p role="alert" className="mt-4 text-sm text-[var(--accent-deep)]">
+        <p role="alert" className="mt-4 text-sm text-accent-deep">
           {results.error}
         </p>
       ) : (
@@ -141,26 +141,26 @@ export function CashFlowCalculator() {
       )}
 
       <div className="mt-4">
-        <button type="button" onClick={() => setState(DEFAULTS)} className="rounded-[var(--radius)] border border-[var(--line-strong)] px-4 py-2 text-[var(--ink)]">
+        <button type="button" onClick={() => setState(DEFAULTS)} className="rounded-fas border border-line-strong px-4 py-2 text-ink">
           Reset
         </button>
       </div>
-      <p className="mt-3 text-xs text-[var(--muted)]">Your inputs are saved on this device only.</p>
+      <p className="mt-3 text-xs text-muted">Your inputs are saved on this device only.</p>
     </section>
   )
 }
 
 function Result({ label, outcome }: { label: string; outcome: Outcome }) {
   return (
-    <div className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--paper)] p-3">
-      <dt className="text-xs text-[var(--muted)]">{label}</dt>
+    <div className="rounded-fas border border-line bg-paper p-3">
+      <dt className="text-xs text-muted">{label}</dt>
       {'error' in outcome ? (
-        <dd className="text-sm text-[var(--accent-deep)]">{outcome.error}</dd>
+        <dd className="text-sm text-accent-deep">{outcome.error}</dd>
       ) : (
         <>
-          <dd className="font-semibold tabular-nums text-[var(--ink)]">{outcome.text}</dd>
+          <dd className="font-semibold tabular-nums text-ink">{outcome.text}</dd>
           {outcome.note && (
-            <dd role="note" className="mt-1 text-xs text-[var(--accent-deep)]">
+            <dd role="note" className="mt-1 text-xs text-accent-deep">
               {outcome.note}
             </dd>
           )}

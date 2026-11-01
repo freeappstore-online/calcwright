@@ -83,21 +83,21 @@ export function TvmCalculator() {
     setTimeout(() => setCopied(false), 1500)
   }
 
-  const field = 'w-full rounded-[var(--radius)] border border-[var(--line-strong)] bg-[var(--paper)] px-3 py-2 text-right tabular-nums text-[var(--ink)]'
+  const field = 'w-full rounded-fas border border-line-strong bg-paper px-3 py-2 text-right tabular-nums text-ink'
 
   return (
-    <section aria-labelledby="tvm-title" className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-6">
-      <h2 id="tvm-title" className="text-lg font-semibold text-[var(--ink)]">
+    <section aria-labelledby="tvm-title" className="rounded-fas border border-line bg-panel p-4 sm:p-6">
+      <h2 id="tvm-title" className="text-lg font-semibold text-ink">
         Time value of money
       </h2>
-      <p className="text-sm text-[var(--muted)]">
+      <p className="text-sm text-muted">
         Pick the value to solve for and fill in the rest. Money paid out is negative, money received is positive.
       </p>
 
       <fieldset aria-label="Values" className="mt-4 grid gap-3">
         {KEYS.map((key) => (
           <div key={key} className="grid grid-cols-[6.5rem_1fr] items-center gap-3">
-            <label className="flex items-center gap-2 font-semibold text-[var(--ink)]">
+            <label className="flex items-center gap-2 font-semibold text-ink">
               <input
                 type="radio"
                 name="tvm-solve-for"
@@ -108,7 +108,7 @@ export function TvmCalculator() {
               {LABELS[key]}
             </label>
             {solveFor === key ? (
-              <output aria-live="polite" className={`${field} bg-[var(--paper-deep)] font-semibold`}>
+              <output aria-live="polite" className={`${field} bg-paper-deep font-semibold`}>
                 {'text' in result ? result.text : '—'}
               </output>
             ) : (
@@ -126,20 +126,20 @@ export function TvmCalculator() {
       </fieldset>
 
       <div className="mt-4 flex flex-wrap items-center gap-4">
-        <label className="flex items-center gap-2 text-sm text-[var(--ink)]">
+        <label className="flex items-center gap-2 text-sm text-ink">
           P/Y
           <input inputMode="decimal" value={values.py} onChange={(e) => set('py', e.target.value)} className={`${field} w-20`} aria-label="Payments per year" />
         </label>
-        <label className="flex items-center gap-2 text-sm text-[var(--ink)]">
+        <label className="flex items-center gap-2 text-sm text-ink">
           C/Y
           <input inputMode="decimal" value={values.cy} onChange={(e) => set('cy', e.target.value)} className={`${field} w-20`} aria-label="Compounding periods per year" />
         </label>
-        <label className="flex items-center gap-2 text-sm text-[var(--ink)]">
+        <label className="flex items-center gap-2 text-sm text-ink">
           Payments at
           <select
             value={mode}
             onChange={(e) => setState((s) => ({ ...s, mode: e.target.value as TvmMode }))}
-            className="rounded-[var(--radius)] border border-[var(--line-strong)] bg-[var(--paper)] px-2 py-2 text-[var(--ink)]"
+            className="rounded-fas border border-line-strong bg-paper px-2 py-2 text-ink"
           >
             <option value="end">End of period</option>
             <option value="begin">Beginning of period</option>
@@ -152,20 +152,20 @@ export function TvmCalculator() {
           type="button"
           onClick={copy}
           disabled={!('text' in result)}
-          className="rounded-[var(--radius)] bg-[var(--accent-deep)] px-4 py-2 font-semibold text-[var(--paper)] disabled:opacity-50"
+          className="rounded-fas bg-accent-deep px-4 py-2 font-semibold text-paper disabled:opacity-50"
         >
           {copied ? 'Copied' : `Copy ${LABELS[solveFor]}`}
         </button>
-        <button type="button" onClick={() => setState(DEFAULTS)} className="rounded-[var(--radius)] border border-[var(--line-strong)] px-4 py-2 text-[var(--ink)]">
+        <button type="button" onClick={() => setState(DEFAULTS)} className="rounded-fas border border-line-strong px-4 py-2 text-ink">
           Reset
         </button>
         {'error' in result && (
-          <p role="alert" className="text-sm text-[var(--accent-deep)]">
+          <p role="alert" className="text-sm text-accent-deep">
             {result.error}
           </p>
         )}
       </div>
-      <p className="mt-3 text-xs text-[var(--muted)]">Your inputs are saved on this device only.</p>
+      <p className="mt-3 text-xs text-muted">Your inputs are saved on this device only.</p>
     </section>
   )
 }

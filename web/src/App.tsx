@@ -92,13 +92,13 @@ function About() {
   return (
     <>
       <PageHeader title="About" />
-      <p className="mt-4 text-[var(--muted)]">
+      <p className="mt-4 text-muted">
         Calcwright brings pro calculators to your browser: time value of money, loans, NPV, IRR and
         MIRR for money, and conduit bending for the trade. It's pure maths on your device, so it
         works offline and your inputs never leave it. Results are estimates, not financial or
         electrical-code advice. No account, no ads, no subscription.
       </p>
-      <p className="mt-4 text-[var(--muted)]">
+      <p className="mt-4 text-muted">
         Calcwright is a free, MIT-licensed app on{' '}
         <a href="https://freeappstore.online" className="underline">
           FreeAppStore
@@ -112,8 +112,8 @@ function About() {
 // Shown under every screen.
 function Notice() {
   return (
-    <aside aria-labelledby="notice-title" className="mt-8 rounded-[var(--radius)] border border-[var(--line)] p-4 text-sm text-[var(--muted)]">
-      <h2 id="notice-title" className="font-semibold text-[var(--ink)]">
+    <aside aria-labelledby="notice-title" className="mt-8 rounded-fas border border-line p-4 text-sm text-muted">
+      <h2 id="notice-title" className="font-semibold text-ink">
         Privacy and disclaimer
       </h2>
       <p className="mt-1">All calculations run locally in your browser; no data is sent to any server.</p>

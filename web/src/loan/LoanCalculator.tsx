@@ -65,26 +65,26 @@ export function LoanCalculator() {
     URL.revokeObjectURL(url)
   }
 
-  const field = 'w-full rounded-[var(--radius)] border border-[var(--line-strong)] bg-[var(--paper)] px-3 py-2 text-right tabular-nums text-[var(--ink)]'
+  const field = 'w-full rounded-fas border border-line-strong bg-paper px-3 py-2 text-right tabular-nums text-ink'
   const loan = 'loan' in result ? result.loan : undefined
 
   return (
-    <section aria-labelledby="loan-title" className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-6">
-      <h2 id="loan-title" className="text-lg font-semibold text-[var(--ink)]">
+    <section aria-labelledby="loan-title" className="rounded-fas border border-line bg-panel p-4 sm:p-6">
+      <h2 id="loan-title" className="text-lg font-semibold text-ink">
         Loan and amortisation
       </h2>
-      <p className="text-sm text-[var(--muted)]">Monthly payments, monthly compounding. An extra payment goes straight to principal each month.</p>
+      <p className="text-sm text-muted">Monthly payments, monthly compounding. An extra payment goes straight to principal each month.</p>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <label className="grid gap-1 text-sm text-[var(--ink)]">
+        <label className="grid gap-1 text-sm text-ink">
           Loan amount
           <input inputMode="decimal" value={state.amount} onChange={(e) => set('amount', e.target.value)} className={field} />
         </label>
-        <label className="grid gap-1 text-sm text-[var(--ink)]">
+        <label className="grid gap-1 text-sm text-ink">
           Annual interest rate, %
           <input inputMode="decimal" value={state.rate} onChange={(e) => set('rate', e.target.value)} className={field} />
         </label>
-        <div className="grid gap-1 text-sm text-[var(--ink)]">
+        <div className="grid gap-1 text-sm text-ink">
           <label htmlFor="loan-term">Term</label>
           <div className="flex gap-2">
             <input id="loan-term" inputMode="decimal" value={state.term} onChange={(e) => set('term', e.target.value)} className={field} />
@@ -92,21 +92,21 @@ export function LoanCalculator() {
               aria-label="Term unit"
               value={state.unit}
               onChange={(e) => set('unit', e.target.value)}
-              className="rounded-[var(--radius)] border border-[var(--line-strong)] bg-[var(--paper)] px-2 py-2 text-[var(--ink)]"
+              className="rounded-fas border border-line-strong bg-paper px-2 py-2 text-ink"
             >
               <option value="years">years</option>
               <option value="months">months</option>
             </select>
           </div>
         </div>
-        <label className="grid gap-1 text-sm text-[var(--ink)]">
+        <label className="grid gap-1 text-sm text-ink">
           Extra payment each month
           <input inputMode="decimal" value={state.extra} onChange={(e) => set('extra', e.target.value)} className={field} />
         </label>
       </div>
 
       {'error' in result && (
-        <p role="alert" className="mt-4 text-sm text-[var(--accent-deep)]">
+        <p role="alert" className="mt-4 text-sm text-accent-deep">
           {result.error}
         </p>
       )}
@@ -123,18 +123,18 @@ export function LoanCalculator() {
           </dl>
 
           <div className="mt-4 flex flex-wrap gap-3">
-            <button type="button" onClick={download} className="rounded-[var(--radius)] bg-[var(--accent-deep)] px-4 py-2 font-semibold text-[var(--paper)]">
+            <button type="button" onClick={download} className="rounded-fas bg-accent-deep px-4 py-2 font-semibold text-paper">
               Download CSV
             </button>
-            <button type="button" onClick={() => setState(DEFAULTS)} className="rounded-[var(--radius)] border border-[var(--line-strong)] px-4 py-2 text-[var(--ink)]">
+            <button type="button" onClick={() => setState(DEFAULTS)} className="rounded-fas border border-line-strong px-4 py-2 text-ink">
               Reset
             </button>
           </div>
 
-          <div className="mt-4 max-h-[32rem] overflow-auto rounded-[var(--radius)] border border-[var(--line)]" tabIndex={0} aria-label="Amortisation schedule">
-            <table className="w-full text-right text-sm tabular-nums text-[var(--ink)]">
+          <div className="mt-4 max-h-[32rem] overflow-auto rounded-fas border border-line" tabIndex={0} aria-label="Amortisation schedule">
+            <table className="w-full text-right text-sm tabular-nums text-ink">
               <caption className="sr-only">Amortisation schedule</caption>
-              <thead className="sticky top-0 bg-[var(--paper-deep)]">
+              <thead className="sticky top-0 bg-paper-deep">
                 <tr>
                   {['#', 'Payment', 'Principal', 'Interest', 'Extra', 'Balance'].map((h) => (
                     <th key={h} scope="col" className="px-3 py-2 font-semibold">
@@ -145,8 +145,8 @@ export function LoanCalculator() {
               </thead>
               <tbody>
                 {loan.rows.map((r) => (
-                  <tr key={r.period} className="border-t border-[var(--line)]">
-                    <th scope="row" className="px-3 py-1 font-normal text-[var(--muted)]">
+                  <tr key={r.period} className="border-t border-line">
+                    <th scope="row" className="px-3 py-1 font-normal text-muted">
                       {r.period}
                     </th>
                     <td className="px-3 py-1">{money(r.payment)}</td>
@@ -161,16 +161,16 @@ export function LoanCalculator() {
           </div>
         </>
       )}
-      <p className="mt-3 text-xs text-[var(--muted)]">Your inputs are saved on this device only.</p>
+      <p className="mt-3 text-xs text-muted">Your inputs are saved on this device only.</p>
     </section>
   )
 }
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--paper)] p-3">
-      <dt className="text-xs text-[var(--muted)]">{label}</dt>
-      <dd className="font-semibold tabular-nums text-[var(--ink)]">{value}</dd>
+    <div className="rounded-fas border border-line bg-paper p-3">
+      <dt className="text-xs text-muted">{label}</dt>
+      <dd className="font-semibold tabular-nums text-ink">{value}</dd>
     </div>
   )
 }

@@ -145,21 +145,21 @@ export function ConduitCalculator() {
   const usesAngle = bend === 'offset' || bend === 'saddle4'
   const usesSize = bend === 'stub' || bend === 'b2b'
 
-  const field = 'w-full rounded-[var(--radius)] border border-[var(--line-strong)] bg-[var(--paper)] px-3 py-2 text-right tabular-nums text-[var(--ink)]'
-  const select = 'rounded-[var(--radius)] border border-[var(--line-strong)] bg-[var(--paper)] px-2 py-2 text-[var(--ink)]'
+  const field = 'w-full rounded-fas border border-line-strong bg-paper px-3 py-2 text-right tabular-nums text-ink'
+  const select = 'rounded-fas border border-line-strong bg-paper px-2 py-2 text-ink'
 
   return (
-    <section aria-labelledby="conduit-title" className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--panel)] p-4 sm:p-6">
-      <h2 id="conduit-title" className="text-lg font-semibold text-[var(--ink)]">
+    <section aria-labelledby="conduit-title" className="rounded-fas border border-line bg-panel p-4 sm:p-6">
+      <h2 id="conduit-title" className="text-lg font-semibold text-ink">
         EMT conduit bending
       </h2>
-      <p className="text-sm text-[var(--muted)]">Hand-bender layouts from the standard trade tables. Marks are measured from the end of the conduit.</p>
+      <p className="text-sm text-muted">Hand-bender layouts from the standard trade tables. Marks are measured from the end of the conduit.</p>
 
       <div className="mt-4 overflow-x-auto">
         <Tabs tabs={TABS} active={bend} onChange={(key) => setState((s) => ({ ...s, bend: key as Bend }))} />
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-[var(--ink)]">
+      <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-ink">
         <div className="flex items-center gap-2">
           <label htmlFor="conduit-units">Units</label>
           <select id="conduit-units" value={units} onChange={(e) => setState((s) => ({ ...s, units: e.target.value as Units }))} className={select}>
@@ -195,7 +195,7 @@ export function ConduitCalculator() {
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         {FIELDS[bend].map((f) => (
-          <label key={f.key} className="grid gap-1 text-sm text-[var(--ink)]">
+          <label key={f.key} className="grid gap-1 text-sm text-ink">
             {f.label}, {units === 'in' ? 'in' : 'mm'}
             <input inputMode="decimal" value={values[f.key]} onChange={(e) => set(f.key, e.target.value)} className={field} />
           </label>
@@ -203,26 +203,26 @@ export function ConduitCalculator() {
       </div>
 
       {'error' in result ? (
-        <p role="alert" className="mt-4 text-sm text-[var(--accent-deep)]">
+        <p role="alert" className="mt-4 text-sm text-accent-deep">
           {result.error}
         </p>
       ) : (
         <dl aria-live="polite" className="mt-4 grid gap-2">
           {result.lines.map(([label, value]) => (
-            <div key={label} className="flex items-baseline justify-between gap-4 border-b border-[var(--line)] py-1">
-              <dt className="text-sm text-[var(--muted)]">{label}</dt>
-              <dd className="font-semibold tabular-nums text-[var(--ink)]">{value}</dd>
+            <div key={label} className="flex items-baseline justify-between gap-4 border-b border-line py-1">
+              <dt className="text-sm text-muted">{label}</dt>
+              <dd className="font-semibold tabular-nums text-ink">{value}</dd>
             </div>
           ))}
         </dl>
       )}
 
       <div className="mt-4">
-        <button type="button" onClick={() => setState(DEFAULTS)} className="rounded-[var(--radius)] border border-[var(--line-strong)] px-4 py-2 text-[var(--ink)]">
+        <button type="button" onClick={() => setState(DEFAULTS)} className="rounded-fas border border-line-strong px-4 py-2 text-ink">
           Reset
         </button>
       </div>
-      <p className="mt-3 text-xs text-[var(--muted)]">
+      <p className="mt-3 text-xs text-muted">
         Take-up varies by bender make; check yours. Your inputs are saved on this device only.
       </p>
     </section>
