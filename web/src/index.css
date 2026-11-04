@@ -96,6 +96,7 @@
   --panel-quiet: rgb(255, 255, 255);
   /* Dark enough for WCAG AA: 5.6:1 under white text, 4.7:1 on --accent-soft. */
   --accent: #a84d2c;
+  --accent-foreground: #ffffff;
   --accent-soft: #ffe8dc;
   --accent-deep: #9f4427;
   --sky: #4c97b5;
@@ -148,6 +149,7 @@
   --panel-strong: rgb(18, 18, 18);
   --panel-quiet: rgb(22, 22, 22);
   --accent: #ff9b76;
+  --accent-foreground: #000000;
   --accent-soft: #3b2119;
   --accent-deep: #ffd9cb;
   --sky: #89cbe5;
@@ -290,8 +292,8 @@ select:focus-visible,
 
 /* Shell's text-size preference scales rem-based app typography. */
 
-/* The Shell's accent buttons (Sign in) use white text, which is too faint on
-   the light dark-theme accent; the paper colour passes AA in both themes. */
+/* Pair the Shell's Sign in accent surface with a theme-aware foreground:
+   white on rust in light mode, black on peach in dark mode (10.23:1). */
 
 /* The Shell's top bar is 20px too wide for a 320px screen; tighten its
    padding there so every control still fits. */
@@ -312,8 +314,9 @@ select:focus-visible,
 }
 :root[data-text='lg'] { font-size: 112.5%; }
 :root[data-text='sm'] { font-size: 87.5%; }
-#root header button[style*="--accent"] {
-  color: var(--paper) !important;
+#root header button.bg-accent {
+  /* Override the SDK's text-white utility in Tailwind's later utilities layer. */
+  color: var(--accent-foreground) !important;
 }
 @media (max-width: 359px) {
   #root header {

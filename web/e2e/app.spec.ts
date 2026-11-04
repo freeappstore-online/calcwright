@@ -24,13 +24,40 @@ test('the nav reaches every calculator', async ({ page, isMobile }) => {
 })
 
 for (const scheme of ['light', 'dark'] as const) {
+  test(`Sign in keeps AA contrast through interaction states (${scheme})`, async ({ page, isMobile }) => {
+    await page.emulateMedia({ colorScheme: scheme })
+    await page.goto('/')
+    const signIn = page.getByRole('banner').getByRole('button', { name: 'Sign in', exact: true })
+    await expect(signIn).toBeVisible()
+
+    async function checkContrast() {
+      const { violations } = await new AxeBuilder({ page })
+        .include('header button.bg-accent').withRules(['color-contrast']).analyze()
+      expect(violations).toEqual([])
+    }
+
+    await checkContrast()
+    if (!isMobile) {
+      await signIn.hover()
+      await checkContrast()
+    }
+    await signIn.focus()
+    await expect(signIn).toBeFocused()
+    await checkContrast()
+    // Hold the pressed state without activating the external sign-in flow.
+    await page.keyboard.down('Space')
+    await checkContrast()
+    await page.keyboard.press('Tab')
+    await page.keyboard.up('Space')
+  })
+
   test(`no WCAG 2.1 AA violations (${scheme})`, async ({ page }) => {
     await page.emulateMedia({ colorScheme: scheme })
     for (const path of SCREENS) {
       await page.goto(path)
       await expectNotice(page)
       const { violations } = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze()
-      expect(violations.map((v) => `${path}: ${v.id} (${v.nodes.length})`)).toEqual([])
+      expect(violations.map((v) => ({ path, id: v.id, nodes: v.nodes.map(({ target, failureSummary }) => ({ target, failureSummary })) }))).toEqual([])
     }
   })
 }
