@@ -26,13 +26,14 @@ test('the nav reaches every calculator', async ({ page, isMobile }) => {
 for (const scheme of ['light', 'dark'] as const) {
   test(`Sign in keeps AA contrast through interaction states (${scheme})`, async ({ page, isMobile }) => {
     await page.emulateMedia({ colorScheme: scheme })
-    await page.goto('/')
-    const signIn = page.getByRole('banner').getByRole('button', { name: 'Sign in', exact: true })
+    // SDK 0.17: sign-in lives on the built-in /profile page, reached from the header avatar.
+    await page.goto('/profile')
+    const signIn = page.getByRole('main').getByRole('button', { name: 'Sign in with GitHub', exact: true })
     await expect(signIn).toBeVisible()
 
     async function checkContrast() {
       const { violations } = await new AxeBuilder({ page })
-        .include('header button.bg-accent').withRules(['color-contrast']).analyze()
+        .include('main button').withRules(['color-contrast']).analyze()
       expect(violations).toEqual([])
     }
 
@@ -67,13 +68,15 @@ test('theme follows the system, and the toggle choice is saved', async ({ page }
   await page.goto('/')
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark')
 
-  // The Shell's toggle cycles system → light → dark.
-  await page.getByRole('button', { name: 'Theme: system' }).click()
-  await expect(page.getByRole('button', { name: 'Theme: light' })).toBeVisible()
+  // SDK 0.17: the theme choice lives on the built-in /profile page.
+  await page.goto('/profile')
+  const light = page.getByRole('button', { name: 'Light', exact: true })
+  await light.click()
+  await expect(light).toHaveAttribute('aria-pressed', 'true')
   await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark')
   await page.reload()
   await expect(page.locator('html')).not.toHaveAttribute('data-theme', 'dark')
-  await expect(page.getByRole('button', { name: 'Theme: light' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Light', exact: true })).toHaveAttribute('aria-pressed', 'true')
 })
 
 test('keyboard: Tab reaches the calculator inputs and they are operable', async ({ page }) => {

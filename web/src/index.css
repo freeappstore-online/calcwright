@@ -314,7 +314,8 @@ select:focus-visible,
 }
 :root[data-text='lg'] { font-size: 112.5%; }
 :root[data-text='sm'] { font-size: 87.5%; }
-#root header button.bg-accent {
+#root header button.bg-accent,
+#root main button.bg-accent {
   /* Override the SDK's text-white utility in Tailwind's later utilities layer. */
   color: var(--accent-foreground) !important;
 }
